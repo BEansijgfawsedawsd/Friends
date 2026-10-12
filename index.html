@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Yummy Chat 🍔</title>
+
+    <meta
+      name="description"
+      content="Yummy Chat - a fun food-themed chat community."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <!-- =========================
+       LOGIN / SIGN UP SCREEN
+  ========================== -->
+
+    <div id="authScreen" class="auth-screen">
+      <div class="auth-card">
+        <div class="auth-logo">
+          <div class="logo-burger">🍔</div>
+
+          <div>
+            <h1>Yummy Chat</h1>
+            <p>Good food. Good chats.</p>
+          </div>
+        </div>
+
+        <!-- LOGIN -->
+
+        <div id="loginBox" class="auth-box">
+          <h2>Welcome back!</h2>
+          <p class="auth-subtitle">Sign in to continue chatting.</p>
+
+          <form id="loginForm">
+            <label for="loginEmail"> Email </label>
+
+            <input
+              id="loginEmail"
+              type="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            />
+
+            <label for="loginPassword"> Password </label>
+
+            <input
+              id="loginPassword"
+              type="password"
+              placeholder="Your password"
+              autocomplete="current-password"
+              required
+            />
+
+            <button type="submit" class="primary-button full-button">
+              🍔 Log In
+            </button>
+          </form>
+
+          <p class="auth-switch">
+            Don't have an account?
+            <button id="showSignup" class="text-button">Sign up</button>
+          </p>
+        </div>
+
+        <!-- SIGN UP -->
+
+        <div id="signupBox" class="auth-box hidden">
+          <h2>Create your account!</h2>
+
+          <p class="auth-subtitle">Join the Yummy Chat community.</p>
+
+          <form id="signupForm">
+            <label for="signupUsername"> Username </label>
+
+            <input
+              id="signupUsername"
+              type="text"
+              placeholder="yummyfan"
+              minlength="3"
+              maxlength="20"
+              autocomplete="username"
+              required
+            />
+
+            <label for="signupEmail"> Email </label>
+
+            <input
+              id="signupEmail"
+              type="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            />
+
+            <label for="signupPassword"> Password </label>
+
+            <input
+              id="signupPassword"
+              type="password"
+              placeholder="At least 6 characters"
+              minlength="6"
+              autocomplete="new-password"
+              required
+            />
+
+            <button type="submit" class="primary-button full-button">
+              🎉 Create Account
+            </button>
+          </form>
+
+          <p class="auth-switch">
+            Already have an account?
+            <button id="showLogin" class="text-button">Log in</button>
+          </p>
+        </div>
+
+        <div id="authMessage" class="auth-message hidden"></div>
+      </div>
+    </div>
+
+    <!-- =========================
+       MAIN APP
+  ========================== -->
+
+    <div id="app" class="app hidden">
+      <!-- SIDEBAR -->
+
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <div class="brand-icon">🍔</div>
+
+          <div>
+            <strong>Yummy Chat</strong>
+            <span>Let's chat!</span>
+          </div>
+        </div>
+
+        <nav class="main-nav">
+          <button class="nav-item active" data-page="home">
+            <span class="nav-icon">🏠</span>
+            <span>Home</span>
+          </button>
+
+          <button class="nav-item" data-page="chat">
+            <span class="nav-icon">💬</span>
+            <span>Chat</span>
+          </button>
+
+          <button class="nav-item" data-page="browser">
+            <span class="nav-icon">🌐</span>
+            <span>Yummy Browser</span>
+          </button>
+
+          <button class="nav-item" data-page="friends">
+            <span class="nav-icon">👥</span>
+            <span>Friends</span>
+          </button>
+
+          <button class="nav-item" data-page="notifications">
+            <span class="nav-icon">🔔</span>
+            <span>Notifications</span>
+
+            <span id="notificationBadge" class="nav-badge hidden"> 0 </span>
+          </button>
+
+          <button class="nav-item" data-page="settings">
+            <span class="nav-icon">⚙️</span>
+            <span>Settings</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <button id="sidebarProfile" class="profile-mini">
+            <div id="sidebarAvatar" class="avatar avatar-small">🍔</div>
+
+            <div class="profile-mini-text">
+              <strong id="sidebarUsername"> Guest </strong>
+
+              <span> View profile </span>
+            </div>
+
+            <span>›</span>
+          </button>
+
+          <button id="logoutButton" class="logout-button">🚪 Log out</button>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+
+      <main class="main-content">
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+          <div class="mobile-brand">
+            🍔
+            <strong>Yummy Chat</strong>
+          </div>
+
+          <div class="topbar-search">
+            <span>🔍</span>
+
+            <input
+              id="globalSearch"
+              type="search"
+              placeholder="Search messages..."
+            />
+          </div>
+
+          <div class="topbar-actions">
+            <button id="themeButton" class="icon-button" title="Change theme">
+              🎨
+            </button>
+
+            <button
+              id="topNotificationButton"
+              class="icon-button notification-button"
+              title="Notifications"
+            >
+              🔔
+
+              <span
+                id="topNotificationBadge"
+                class="notification-dot hidden"
+              ></span>
+            </button>
+
+            <button id="topProfileButton" class="top-profile">
+              <div id="topAvatar" class="avatar avatar-tiny">🍔</div>
+
+              <span id="topUsername"> Guest </span>
+            </button>
+          </div>
+        </header>
+
+        <!-- =========================
+           HOME PAGE
+      ========================== -->
+
+        <section id="page-home" class="page active-page">
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow"> 🍔 YUMMY CHAT </span>
+
+              <h1>
+                Welcome back,
+                <span id="homeUsername"> friend </span>!
+              </h1>
+
+              <p>Grab a snack and see what's happening.</p>
+            </div>
+
+            <button class="primary-button" data-page="chat">
+              💬 Open Chat
+            </button>
+          </div>
+
+          <!-- HERO -->
+
+          <div class="hero-card">
+            <div class="hero-text">
+              <span class="hero-small"> TODAY'S SPECIAL </span>
+
+              <h2>Good conversations taste better.</h2>
+
+              <p>
+                Chat with friends, share reactions, discover people and explore
+                the web.
+              </p>
+
+              <button class="hero-button" data-page="chat">
+                Start chatting →
+              </button>
+            </div>
+
+            <div class="hero-food">🍔</div>
+          </div>
+
+          <!-- STATS -->
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon orange">💬</div>
+
+              <div>
+                <span>Messages</span>
+                <strong id="statMessages">0</strong>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon green">👥</div>
+
+              <div>
+                <span>Friends</span>
+                <strong id="statFriends">0</strong>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon purple">❤️</div>
+
+              <div>
+                <span>Reactions</span>
+                <strong id="statReactions">0</strong>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon blue">🟢</div>
+
+              <div>
+                <span>Status</span>
+                <strong id="statStatus"> Online </strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- HOME COLUMNS -->
+
+          <div class="home-columns">
+            <div class="panel">
+              <div class="panel-heading">
+                <div>
+                  <h3>Quick picks</h3>
+                  <p>Jump into something fun.</p>
+                </div>
+              </div>
+
+              <div class="quick-grid">
+                <button class="quick-card" data-page="chat">
+                  <span>💬</span>
+                  <strong>Public Chat</strong>
+                  <small>Talk with everyone</small>
+                </button>
+
+                <button class="quick-card" data-page="friends">
+                  <span>👥</span>
+                  <strong>Friends</strong>
+                  <small>Find your people</small>
+                </button>
+
+                <button class="quick-card" data-page="browser">
+                  <span>🌐</span>
+                  <strong>Browser</strong>
+                  <small>Explore the web</small>
+                </button>
+
+                <button class="quick-card" data-page="profile">
+                  <span>👤</span>
+                  <strong>Your Profile</strong>
+                  <small>Customize yourself</small>
+                </button>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-heading">
+                <div>
+                  <h3>Recent activity</h3>
+                  <p>Your latest Yummy Chat activity.</p>
+                </div>
+              </div>
+
+              <div id="activityList" class="activity-list">
+                <div class="empty-state small">
+                  <span>🍟</span>
+                  <p>No activity yet.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================
+           CHAT PAGE
+      ========================== -->
+
+        <section id="page-chat" class="page">
+          <div class="chat-layout">
+            <div class="chat-main">
+              <div class="chat-header">
+                <div>
+                  <span class="eyebrow"> PUBLIC ROOM </span>
+
+                  <h1>🍔 Yummy Chat</h1>
+
+                  <p>Everyone can join the conversation.</p>
+                </div>
+
+                <div class="online-pill">
+                  <span></span>
+                  Online
+                </div>
+              </div>
+
+              <!-- PINNED -->
+
+              <div id="pinnedBar" class="pinned-bar hidden">
+                <span>📌</span>
+
+                <div>
+                  <strong>Pinned</strong>
+                  <span id="pinnedPreview"></span>
+                </div>
+
+                <button id="closePinned" class="small-icon-button">×</button>
+              </div>
+
+              <!-- MESSAGES -->
+
+              <div id="messages" class="messages">
+                <div id="messageLoading" class="empty-state">
+                  <span>🍔</span>
+
+                  <h3>Loading the chat...</h3>
+
+                  <p>Getting everything ready.</p>
+                </div>
+              </div>
+
+              <!-- TYPING -->
+
+              <div id="typingIndicator" class="typing-indicator hidden">
+                Someone is typing...
+              </div>
+
+              <!-- CHAT INPUT -->
+
+              <form id="messageForm" class="message-form">
+                <button
+                  type="button"
+                  id="emojiButton"
+                  class="input-icon-button"
+                  title="Food reactions"
+                >
+                  😊
+                </button>
+
+                <label class="input-icon-button" title="Send image">
+                  📷
+
+                  <input id="imageInput" type="file" accept="image/*" hidden />
+                </label>
+
+                <input
+                  id="messageInput"
+                  type="text"
+                  maxlength="1000"
+                  placeholder="Type a message..."
+                  autocomplete="off"
+                />
+
+                <button type="submit" class="send-button" title="Send">
+                  ➤
+                </button>
+              </form>
+
+              <!-- EMOJI MENU -->
+
+              <div id="emojiMenu" class="emoji-menu hidden">
+                <button type="button">🍔</button>
+                <button type="button">🍕</button>
+                <button type="button">🌮</button>
+                <button type="button">🍟</button>
+                <button type="button">🍩</button>
+                <button type="button">🍪</button>
+                <button type="button">🍓</button>
+                <button type="button">🍎</button>
+                <button type="button">❤️</button>
+                <button type="button">😂</button>
+                <button type="button">🔥</button>
+                <button type="button">👍</button>
+              </div>
+            </div>
+
+            <!-- CHAT SIDE PANEL -->
+
+            <aside class="chat-side">
+              <div class="side-panel">
+                <div class="side-panel-heading">
+                  <h3>People</h3>
+
+                  <span id="peopleCount"> 0 </span>
+                </div>
+
+                <div id="peopleList" class="people-list">
+                  <div class="empty-state small">
+                    <span>👥</span>
+                    <p>No people yet.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="side-panel">
+                <div class="side-panel-heading">
+                  <h3>Pinned</h3>
+
+                  <span>📌</span>
+                </div>
+
+                <div id="pinnedMessages" class="pinned-list">
+                  <div class="empty-state small">
+                    <span>📌</span>
+                    <p>No pinned messages.</p>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <!-- =========================
+           BROWSER PAGE
+      ========================== -->
+
+        <section id="page-browser" class="page">
+          <div class="page-heading compact">
+            <div>
+              <span class="eyebrow"> 🌐 YUMMY BROWSER </span>
+
+              <h1>Browse the web</h1>
+
+              <p>Search with DuckDuckGo or enter a website address.</p>
+            </div>
+          </div>
+
+          <div class="browser-container">
+            <div class="browser-toolbar">
+              <button id="browserBack" class="browser-control" title="Back">
+                ←
+              </button>
+
+              <button
+                id="browserForward"
+                class="browser-control"
+                title="Forward"
+              >
+                →
+              </button>
+
+              <button id="browserReload" class="browser-control" title="Reload">
+                ↻
+              </button>
+
+              <button id="browserHome" class="browser-control" title="Home">
+                🏠
+              </button>
+
+              <form id="browserForm" class="browser-address">
+                <span>🔒</span>
+
+                <input
+                  id="browserAddress"
+                  type="text"
+                  placeholder="Search or enter website address..."
+                  autocomplete="off"
+                />
+
+                <button type="submit">Go</button>
+              </form>
+            </div>
+
+            <div class="browser-content">
+              <div id="browserHomeScreen" class="browser-home-screen">
+                <div class="browser-logo">🌐</div>
+
+                <h2>Yummy Browser</h2>
+
+                <p>Search the web with DuckDuckGo.</p>
+
+                <form id="browserSearchForm" class="browser-search">
+                  <span>🔍</span>
+
+                  <input
+                    id="browserSearchInput"
+                    type="text"
+                    placeholder="What do you want to search?"
+                  />
+
+                  <button type="submit">Search</button>
+                </form>
+
+                <div class="browser-shortcuts">
+                  <button
+                    class="browser-shortcut"
+                    data-url="https://duckduckgo.com"
+                  >
+                    🦆
+                    <span>DuckDuckGo</span>
+                  </button>
+
+                  <button
+                    class="browser-shortcut"
+                    data-url="https://www.wikipedia.org"
+                  >
+                    📚
+                    <span>Wikipedia</span>
+                  </button>
+
+                  <button
+                    class="browser-shortcut"
+                    data-url="https://example.com"
+                  >
+                    🌐
+                    <span>Example</span>
+                  </button>
+                </div>
+              </div>
+
+              <div
+                id="browserSearchScreen"
+                class="browser-search-screen hidden"
+              >
+                <div class="search-page-icon">🦆</div>
+
+                <h2>DuckDuckGo Search</h2>
+
+                <p id="browserSearchText">Search results</p>
+
+                <a
+                  id="openDuckSearch"
+                  href="#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="primary-button"
+                >
+                  Open DuckDuckGo Results →
+                </a>
+
+                <p class="browser-note">
+                  Some websites don't allow themselves to be displayed inside
+                  other websites.
+                </p>
+              </div>
+
+              <iframe
+                id="browserFrame"
+                class="browser-frame hidden"
+                title="Yummy Browser"
+                sandbox="allow-forms allow-modals allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-presentation allow-same-origin allow-scripts"
+              ></iframe>
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================
+           FRIENDS PAGE
+      ========================== -->
+
+        <section id="page-friends" class="page">
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow"> 👥 COMMUNITY </span>
+
+              <h1>Friends</h1>
+
+              <p>Find people and build your Yummy Chat crew.</p>
+            </div>
+          </div>
+
+          <div class="friends-layout">
+            <div class="panel">
+              <div class="panel-heading">
+                <div>
+                  <h3>Your friends</h3>
+                  <p>People you've connected with.</p>
+                </div>
+
+                <span id="friendsCount" class="count-pill"> 0 </span>
+              </div>
+
+              <div id="friendsList" class="friends-list">
+                <div class="empty-state">
+                  <span>👥</span>
+                  <h3>No friends yet</h3>
+                  <p>Add someone from the chat.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-heading">
+                <div>
+                  <h3>Find people</h3>
+                  <p>Search for a Yummy Chat user.</p>
+                </div>
+              </div>
+
+              <form id="friendSearchForm" class="friend-search-form">
+                <input
+                  id="friendSearchInput"
+                  type="text"
+                  placeholder="Search username..."
+                />
+
+                <button type="submit" class="primary-button">Search</button>
+              </form>
+
+              <div id="friendSearchResults" class="friend-results"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================
+           NOTIFICATIONS PAGE
+      ========================== -->
+
+        <section id="page-notifications" class="page">
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow"> 🔔 UPDATES </span>
+
+              <h1>Notifications</h1>
+
+              <p>See what's happening around your account.</p>
+            </div>
+
+            <button id="markNotificationsRead" class="secondary-button">
+              Mark all read
+            </button>
+          </div>
+
+          <div class="panel">
+            <div id="notificationsList" class="notifications-list">
+              <div class="empty-state">
+                <span>🔔</span>
+                <h3>No notifications</h3>
+                <p>You're all caught up!</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================
+           SETTINGS PAGE
+      ========================== -->
+
+        <section id="page-settings" class="page">
+          <div class="page-heading">
+            <div>
+              <span class="eyebrow"> ⚙️ CUSTOMIZE </span>
+
+              <h1>Settings</h1>
+
+              <p>Make Yummy Chat feel like yours.</p>
+            </div>
+          </div>
+
+          <div class="settings-layout">
+            <div class="panel">
+              <div class="panel-heading">
+                <div>
+                  <h3>Appearance</h3>
+                  <p>Choose how Yummy Chat looks.</p>
+                </div>
+              </div>
+
+              <div class="setting-row">
+                <div>
+                  <strong>Theme</strong>
+
+                  <span> Change the colors of the app. </span>
+                </div>
+
+                <select id="themeSelect">
+                  <option value="light">Light</option>
+
+                  <option value="dark">Dark</option>
+
+                  <option value="purple">Purple</option>
+                </select>
+              </div>
+
+              <div class="setting-row">
+                <div>
+                  <strong>Compact mode</strong>
+
+                  <span> Make the chat more compact. </span>
+                </div>
+
+                <label class="toggle">
+                  <input id="compactMode" type="checkbox" />
+
+                  <span></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-heading">
+                <div>
+                  <h3>Chat</h3>
+                  <p>Customize your chatting experience.</p>
+                </div>
+              </div>
+
+              <div class="setting-row">
+                <div>
+                  <strong>Enter to send</strong>
+
+                  <span> Press Enter to send messages. </span>
+                </div>
+
+                <label class="toggle">
+                  <input id="enterToSend" type="checkbox" checked />
+
+                  <span></span>
+                </label>
+              </div>
+
+              <div class="setting-row">
+                <div>
+                  <strong>Food emojis</strong>
+
+                  <span> Show food-themed emoji suggestions. </span>
+                </div>
+
+                <label class="toggle">
+                  <input id="foodEmojis" type="checkbox" checked />
+
+                  <span></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================
+           PROFILE PAGE
+      ========================== -->
+
+        <section id="page-profile" class="page">
+          <div class="profile-page">
+            <div class="profile-cover"></div>
+
+            <div class="profile-main">
+              <div id="profileAvatar" class="profile-avatar">🍔</div>
+
+              <div class="profile-info">
+                <h1 id="profileUsername">Username</h1>
+
+                <p id="profileBio">No bio yet.</p>
+
+                <span id="profileStatus" class="profile-status">
+                  🟢 Online
+                </span>
+              </div>
+
+              <button id="editProfileButton" class="primary-button">
+                ✏️ Edit Profile
+              </button>
+            </div>
+
+            <div class="profile-panels">
+              <div class="panel">
+                <div class="panel-heading">
+                  <div>
+                    <h3>About</h3>
+                    <p>Your Yummy Chat profile.</p>
+                  </div>
+                </div>
+
+                <div class="profile-details">
+                  <div>
+                    <span>👤 Username</span>
+                    <strong id="profileDetailUsername"> — </strong>
+                  </div>
+
+                  <div>
+                    <span>📅 Joined</span>
+                    <strong id="profileJoined"> — </strong>
+                  </div>
+
+                  <div>
+                    <span>💬 Messages</span>
+                    <strong id="profileMessages"> 0 </strong>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel">
+                <div class="panel-heading">
+                  <div>
+                    <h3>Favorite reaction</h3>
+                    <p>Because every chat needs snacks.</p>
+                  </div>
+                </div>
+
+                <div class="favorite-food">🍔 🍕 🍟 🌮 🍩</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- =========================
+       EDIT PROFILE MODAL
+  ========================== -->
+
+    <div id="profileModal" class="modal hidden">
+      <div class="modal-backdrop"></div>
+
+      <div class="modal-card">
+        <div class="modal-header">
+          <div>
+            <h2>Edit Profile</h2>
+            <p>Make your profile yours.</p>
+          </div>
+
+          <button class="modal-close" data-close-modal>×</button>
+        </div>
+
+        <form id="profileForm">
+          <label for="profileUsernameInput"> Username </label>
+
+          <input
+            id="profileUsernameInput"
+            type="text"
+            minlength="3"
+            maxlength="20"
+            required
+          />
+
+          <label for="profileBioInput"> Bio </label>
+
+          <textarea
+            id="profileBioInput"
+            maxlength="160"
+            placeholder="Tell everyone about yourself..."
+          ></textarea>
+
+          <label for="profileAvatarInput"> Avatar emoji </label>
+
+          <input
+            id="profileAvatarInput"
+            type="text"
+            maxlength="2"
+            placeholder="🍔"
+          />
+
+          <div class="modal-actions">
+            <button type="button" class="secondary-button" data-close-modal>
+              Cancel
+            </button>
+
+            <button type="submit" class="primary-button">Save Profile</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- =========================
+       MESSAGE CONTEXT MENU
+  ========================== -->
+
+    <div id="messageMenu" class="context-menu hidden">
+      <button id="menuReply">↩️ Reply</button>
+
+      <button id="menuReact">❤️ React</button>
+
+      <button id="menuPin">📌 Pin</button>
+
+      <button id="menuEdit">✏️ Edit</button>
+
+      <button id="menuDelete">🗑️ Delete</button>
+    </div>
+
+    <!-- =========================
+       TOAST
+  ========================== -->
+
+    <div id="toast" class="toast hidden">
+      <span id="toastIcon"> 🍔 </span>
+
+      <span id="toastText"> Done! </span>
+    </div>
+
+    <!-- =========================
+       SCRIPT
+  ========================== -->
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
